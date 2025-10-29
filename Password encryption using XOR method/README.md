@@ -1,5 +1,8 @@
 - https://crackmes.one/crackme/68407be02b84be7ea77435d6
 - Creator of the challange: OlegBobrov
+
+Disclaimer, I'm not some RE god and also with any paste/post like these you should always try to fact check, I may have inaccuracies here.
+
 # Step 1:
 ## Getting started with the RE.
 I will start by running strings on it to see what is visiable here.
