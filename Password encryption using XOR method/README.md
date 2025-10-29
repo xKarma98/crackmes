@@ -89,3 +89,89 @@ Now jump if not zero to "try again" which if the above failed you will be shown 
 
 # Ok, explaination is done we need that secret message.
 Refer to solution.py
+
+# Let's see the diassembled code to understand it easier.
+```cpp
+int __fastcall main(int argc, const char **argv, const char **envp)
+{
+  __int64 v3; // rax
+  __int64 v4; // rax
+  __int64 *v5; // rax
+  const void *v6; // rcx
+  bool v7; // bl
+  _BYTE *v8; // rcx
+  const char *v9; // rdx
+  void *v10; // rcx
+  void *v11; // rcx
+  void *Block; // [rsp+20h] [rbp-19h] BYREF
+  unsigned __int64 v14; // [rsp+38h] [rbp-1h]
+  void *v15[2]; // [rsp+40h] [rbp+7h] BYREF
+  __int64 v16; // [rsp+50h] [rbp+17h]
+  unsigned __int64 v17; // [rsp+58h] [rbp+1Fh]
+  void *v18[2]; // [rsp+60h] [rbp+27h] BYREF
+  __int64 v19; // [rsp+70h] [rbp+37h]
+  unsigned __int64 v20; // [rsp+78h] [rbp+3Fh]
+
+  // 15 bit long key.
+  v16 = 15;
+  v17 = 15;
+
+  // String copy the ciphertext.
+  strcpy((char *)v15, "sCPZSUPgTG@G^C]");
+  *(_OWORD *)v18 = 0;
+  v19 = 0;
+  v20 = 15;
+  LOBYTE(v18[0]) = 0;
+  // Prompt the user for password, code.
+  v3 = sub_1400017D0(std::cout, (__int64)"Your password: ");
+  v4 = sub_140001DC0(v3, (__int64)v15, 15u);
+  sub_1400017D0(v4, (__int64)"\nWrite the secret code: ");
+  sub_1400019B0(std::cin, v18);
+  v5 = sub_1400012A0((__int64 *)&Block, (__int64)v15, v18);
+  v6 = v5;
+  if ( (unsigned __int64)v5[3] > 0xF )
+    v6 = (const void *)*v5; // v6 was set to v5 and now is a void ptr.
+
+  // Our key to decrypt is here.
+  v7 = v5[2] == '\x0F' && memcmp(v6, "CrackmePassword", '\x0F') == 0;
+  if ( v14 > 0xF ) // if v14 is greater than 0xF, we hit congrats.
+  {
+    v8 = Block; // v8 is set to our block.
+    if ( v14 + 1 >= 0x1000 ) // v14 + 1 if this is larger than or equal to we get a invalid parameter.
+    {
+      v8 = (_BYTE *)*((_QWORD *)Block - 1);
+      if ( (unsigned __int64)((_BYTE *)Block - v8 - 8) > 0x1F )
+        invalid_parameter_noinfo_noreturn();
+    }
+    j_j_free(v8); // And free the memory.
+  }
+  v9 = "\nCongratulations!!!\n";
+  if ( !v7 )
+    v9 = "\nTry again\n";
+  sub_1400017D0(std::cout, (__int64)v9);
+  system("pause");
+  if ( v20 > 0xF )
+  {
+    v10 = v18[0];
+    if ( v20 + 1 >= 0x1000 )
+    {
+      v10 = (void *)*((_QWORD *)v18[0] - 1);
+      if ( (unsigned __int64)((char *)v18[0] - (char *)v10 - 8) > 0x1F )
+        invalid_parameter_noinfo_noreturn();
+    }
+    j_j_free(v10);
+  }
+  if ( v17 > 0xF )
+  {
+    v11 = v15[0];
+    if ( v17 + 1 >= 0x1000 )
+    {
+      v11 = (void *)*((_QWORD *)v15[0] - 1);
+      if ( (unsigned __int64)((char *)v15[0] - (char *)v11 - 8) > 0x1F )
+        invalid_parameter_noinfo_noreturn();
+    }
+    j_j_free(v11);
+  }
+  return 0;
+}
+```
