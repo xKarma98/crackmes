@@ -13,7 +13,7 @@ Author: Eilay_Yosfan
 
 # Let's go now.
 I want to know what's going on in the main function here, I instantly noticed something of interest.
-`mov     [rbp+theKey], 44h` With ida I clicked on the 44h the `h` is here because this is 0x44 in hexidecimal
+`mov     [rbp+theKey], 44h` With ida I clicked on the 44h the `h` is here because this is 0x44 in hexidecimal, you will notice a 68 here in the pannel.
 
 # To figure out the true value being added to rbp we head here.
 RBP is our base pointer, in which is of interest if we see this moving here and again being compared before our if statement at the bottom of the code.
